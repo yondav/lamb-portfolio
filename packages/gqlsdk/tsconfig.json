@@ -1,0 +1,20 @@
+{
+  "extends": "@lamb/tsconfig/base.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "declarationDir": "./lib",
+    "lib": ["dom", "esnext"],
+    "module": "ESNext",
+    "noEmit": false,
+    "outDir": "./lib",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "typeRoots": ["./../../node_modules/@types"]
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "exclude": ["node_modules", "./lib/**/*", "codegen.ts"],
+  "include": ["**/*.ts*"]
+}
