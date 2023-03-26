@@ -1,0 +1,8 @@
+{
+  "extends": "@lamb/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "moduleResolution": "node"
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
