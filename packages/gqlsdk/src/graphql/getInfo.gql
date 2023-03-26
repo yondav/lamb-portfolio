@@ -1,0 +1,32 @@
+query getInfo {
+  Info( id: "info" ) {
+    name
+    title
+    image {
+      asset {
+        url
+      }
+    }
+    details {
+      title
+      copyRaw
+    }
+    credentials {
+      resume {
+        asset {
+          url
+        }
+      }
+      readout {
+        asset {
+          url
+        }
+      }
+    }
+    socials {
+      email
+      linkedin
+      instagram
+    }
+  }
+}
