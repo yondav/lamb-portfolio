@@ -1,0 +1,50 @@
+{
+  "name": "lamb-portfolio",
+  "version": "0.0.0",
+  "private": true,
+  "author": {
+    "name": "Yoni David",
+    "email": "yoni@yondav.us",
+    "url": "https:yondav.us"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "fix": "turbo run fix",
+    "git:alias-commit": "git config alias.cz 'npx cz'",
+    "git:hookspath": "git config core.hooksPath .githooks",
+    "lint": "turbo run lint",
+    "preinstall": "yarn git:hookspath && yarn git:alias-commit"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@lamb/eslint": "*",
+    "cz-conventional-changelog": "^3.3.0",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "babelMacros": {
+    "twin": {
+      "config": "./../../tailwind.config.js",
+      "preset": "styled-components"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "yarn@1.22.17"
+}
