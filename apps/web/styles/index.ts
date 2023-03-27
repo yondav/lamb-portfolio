@@ -17,7 +17,7 @@ export const gutters = tw`mx-auto max-w-[1200px] w-[calc(100vw - 32px)] md:w-[ca
 
 export const wrapper = {
   ...gutters,
-  ...tw`py-16 grid grid-cols-12 gap-x-3 gap-y-16 md:(w-[calc(100vw - 96px)] gap-4) xl:(w-[calc(100vw - 240px)] gap-6)`,
+  ...tw`py-16 grid grid-cols-12 gap-x-3 gap-y-16 md:(w-[calc(100vw - 96px)] gap-x-4) xl:(w-[calc(100vw - 240px)] gap-6)`,
 };
 
 export const cell = ({ span, md, lg }: CellProps) => [

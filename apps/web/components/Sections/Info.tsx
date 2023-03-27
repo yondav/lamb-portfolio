@@ -1,8 +1,7 @@
 import type { Info } from '@lamb/gqlsdk';
 import { forwardRef } from 'react';
-import tw, { css, styled, theme } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
-import { useMediaQuery } from '../../hooks';
 import { cell, wrapper } from '../../styles';
 import Button from '../Button';
 import { Echo } from '../SVG';
@@ -16,7 +15,7 @@ interface InfoProps extends SectionProps {
 }
 
 const InfoSectionWrapper = styled.section<{ layout: 'grid' | 'flex' }>(({ layout }) => [
-  layout === 'grid' && { ...wrapper, ...tw`py-0 gap-y-8` },
+  layout === 'grid' && { ...wrapper, ...tw`py-0 gap-y-8 sm:gap-y-16` },
   layout === 'flex' && tw`flex flex-col gap-16`,
 ]);
 
@@ -24,26 +23,8 @@ const InfoHeader = styled(H1)(tw`max-w-xs md:max-w-md lg:max-w-xl xl:max-w-2xl`)
 
 const InfoButtonGroup = styled.div(tw`w-fit flex flex-col gap-6 xl:flex-row`);
 
-const InfoGraphicContainer = styled.div(
-  () => css`
-    ${tw`md:(h-full relative overflow-hidden shadow-nav)`}
-    & div {
-      ${tw`absolute left-0 w-screen sm:flex md:(relative w-full) lg:(grid grid-cols-2 gap-0)`}
-      & svg {
-        ${tw`w-full sm:w-1/2`}
-        @media only screen and (min-width: ${theme`screens.lg`}) {
-          ${tw`col-span-1 w-auto`}
-        }
-      }
-    }
-  `
-);
-
 const InfoSection = forwardRef<HTMLElement, InfoProps>(
   ({ title, credentials, sectionId }, ref) => {
-    const smBreak = useMediaQuery(`(min-width: ${theme`screens.sm`})`);
-    const lgBreak = useMediaQuery(`(min-width: ${theme`screens.lg`})`);
-
     return (
       <>
         <InfoSectionWrapper
