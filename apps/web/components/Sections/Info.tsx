@@ -76,14 +76,7 @@ const InfoSection = forwardRef<HTMLElement, InfoProps>(
             </InfoButtonGroup>
           </InfoSectionWrapper>
           <InfoSectionWrapper css={cell({ span: 12, lg: 5 })} layout='flex'>
-            <InfoGraphicContainer>
-              <div>
-                <Echo />
-                <Echo hidden={!smBreak} />
-                <Echo hidden={!lgBreak} />
-                <Echo hidden={!lgBreak} />
-              </div>
-            </InfoGraphicContainer>
+            <Echo />
           </InfoSectionWrapper>
         </InfoSectionWrapper>
       </>
