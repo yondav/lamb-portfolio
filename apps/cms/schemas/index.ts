@@ -1,15 +1,32 @@
-import credentials from './credentials';
-import details from './details';
-import info from './info';
-import socials from './socials';
-import work from './work';
+import { copyComponent, galleryComponent, imageComponent } from './components';
+import info, { infoCredentials, infoDetails, infoSocials } from './info';
+import { colSpan, elements } from './layout';
+import page, { pageBlock } from './page';
+import user from './user';
+import work, { workCard } from './work';
 
 export const schemaTypes = [
-  info,
-  work,
+  // components
+  copyComponent,
+  galleryComponent,
+  imageComponent,
 
-  // Other types
-  credentials,
-  details,
-  socials,
+  // layout
+  colSpan,
+  elements,
+
+  // info
+  info,
+  infoCredentials,
+  infoDetails,
+  infoSocials,
+
+  // work
+  work,
+  workCard,
+
+  user,
+
+  page,
+  pageBlock,
 ];

@@ -1,15 +1,46 @@
-import type { StructureBuilder } from 'sanity/desk';
+import { visionTool } from '@sanity/vision';
+import { defineConfig } from 'sanity';
+import { deskTool } from 'sanity/desk';
 
-const structure = (S: StructureBuilder) =>
-  S.list()
-    .title('Base')
-    .items([
-      S.listItem()
-        .title('Info')
-        .child(S.document().schemaType('info').documentId('info')),
-      ...S.documentTypeListItems().filter(
-        listItem => !['info'].includes(listItem.getId() as string)
-      ),
-    ]);
+import { schemaTypes } from './schemas';
 
-export default structure;
+const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
+const singletonTypes = new Set(['info']);
+
+export default defineConfig({
+  name: 'default',
+  title: 'Alison Lamb, Visual Designer',
+
+  projectId: '0wrqsydr',
+  dataset: 'production',
+
+  plugins: [
+    deskTool({
+      structure: S =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Info')
+              .id('info')
+              .child(S.document().schemaType('info').documentId('info')),
+            S.documentTypeListItem('work').title('Work'),
+          ]),
+    }),
+    visionTool(),
+  ],
+
+  schema: {
+    types: schemaTypes,
+
+    templates: templates =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+  },
+
+  document: {
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
+  },
+});
