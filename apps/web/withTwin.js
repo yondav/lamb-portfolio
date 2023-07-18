@@ -5,20 +5,20 @@ const includedDirs = [
   path.resolve(__dirname, 'components'),
   path.resolve(__dirname, 'pages'),
   path.resolve(__dirname, 'styles'),
+  // ui,
 ];
 
 module.exports = function withTwin(nextConfig) {
   return {
     ...nextConfig,
-    webpack(config, options) {
-      const { dev, isServer } = options;
+    webpack(config, { dev, isServer, defaultLoaders }) {
       config.module = config.module || {};
       config.module.rules = config.module.rules || [];
       config.module.rules.push({
         test: /\.(tsx|ts)$/,
         include: includedDirs,
         use: [
-          options.defaultLoaders.babel,
+          defaultLoaders.babel,
           {
             loader: 'babel-loader',
             options: {
