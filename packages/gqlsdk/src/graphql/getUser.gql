@@ -1,0 +1,14 @@
+query getUser($name: String!, $email: String!, $verified: Boolean!) {
+  allUser(
+    where: {
+      name: { eq: $name }
+      email: { eq: $email }
+      emailVerified: { eq: $verified }
+    }
+  ) {
+    name
+    email
+    emailVerified
+    image
+  }
+}

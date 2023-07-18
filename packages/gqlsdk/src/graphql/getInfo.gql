@@ -1,5 +1,5 @@
-query getInfo {
-  Info( id: "info" ) {
+query getInfo($preview: Boolean!) {
+allInfo(where: {_: {is_draft: $preview}}) {
     name
     title
     image {

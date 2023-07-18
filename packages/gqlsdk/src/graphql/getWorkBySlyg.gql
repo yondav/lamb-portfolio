@@ -1,0 +1,44 @@
+query getWorkBySlug($slug: String!, $preview: Boolean!) {
+  # allWork(where: {slug: {current: {eq: "print"}}}) {
+  allWork(
+    where: { slug: { current: { eq: $slug } }, _: { is_draft: $preview } }
+  ) {
+    slug {
+      current
+    }
+    title
+    link
+    card {
+      image {
+        asset {
+          url
+        }
+      }
+    }
+    page {
+      colSpan
+      elements {
+        __typename
+        ... on ImagePageBlock {
+          image {
+            asset {
+              url
+            }
+          }
+          alt
+          copyRaw
+        }
+        ... on CopyPageBlock {
+          copyBlockRaw
+        }
+        ... on GalleryPageBlock {
+          images {
+            asset {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}

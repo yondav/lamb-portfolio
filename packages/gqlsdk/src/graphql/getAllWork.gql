@@ -1,0 +1,17 @@
+query getAllWork($preview: Boolean!) {
+	allWork(where: { _: { is_draft: $preview } }) {
+    slug {
+      current
+    }
+		title
+    link
+    card {
+      image {
+        asset {
+          url
+        }
+      }
+      descriptionRaw
+    }
+  }
+}
