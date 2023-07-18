@@ -1,2 +1,2 @@
-export { default as useMediaQuery } from './useMediaQuery'
-export { default as useScrollRouting } from './useScrollRouting'
+export { default as useMediaQuery } from './useMediaQuery';
+export { default as useScrollRouting } from './useScrollRouting';

@@ -12,21 +12,24 @@ export default function useScrollRouting({ section, sectionId }: ScrollRoutingPa
   const router = useRouter();
   const {
     position: { y },
+    scrolling,
   } = useScrollData();
 
   const bounds = section.current?.getBoundingClientRect();
 
   const pushRoute = useCallback(() => {
     if (!bounds) return;
-    if (y === 0) router.push(`/`, undefined, { shallow: true });
-    if (y > bounds.top && y < bounds.bottom) {
-      if (router.asPath === `/#${sectionId}`) return;
-      router.push(`/#${sectionId}`, undefined, { shallow: true });
+    if (y < 70) router.push(`/`, undefined, { shallow: true });
+    if (bounds.top <= 70 && bounds.bottom >= 70) {
+      if (router.asPath === `/${sectionId}`) return;
+      router.push(`/#${sectionId}`, `/${sectionId}`, { shallow: true, scroll: false });
     }
   }, [bounds, router, sectionId, y]);
 
   useEffect(() => {
-    pushRoute();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [y]);
+    if (!scrolling) {
+      pushRoute();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [y, scrolling]);
 }
