@@ -1,18 +1,17 @@
 import type { ReactNode } from 'react';
 import tw, { styled } from 'twin.macro';
 
-import { useStickyContext } from '../../contexts/sticky';
-import { wrapper } from '../../styles';
+import { useNavContext } from '../../contexts/nav';
 
 const Wrapper = styled(({ ...props }) => (
   <main {...(({ sticky, ...rest }) => rest)(props)}>{props.children}</main>
 ))<{ sticky: boolean }>`
-  ${wrapper}
+  ${tw`w-full`}
   ${({ sticky }) => sticky && tw`mt-16`}
 `;
 
 export default function MainWrapper({ children }: { children: ReactNode }) {
-  const { sticky } = useStickyContext();
+  const { sticky, active } = useNavContext();
 
-  return <Wrapper sticky={sticky}>{children}</Wrapper>;
+  return <Wrapper sticky={sticky || active}>{children}</Wrapper>;
 }
