@@ -11,7 +11,9 @@ interface LogoSVGProps {
   stroke?: boolean;
 }
 
-const LogoLink = styled.a<LogoLinkProps>(({ size }) => [
+type LogoProps = LogoLinkProps & LogoSVGProps;
+
+const LogoLink = styled.div<LogoLinkProps>(({ size }) => [
   size === 'sm' && tw`w-10`,
   size === 'md' && tw`w-16`,
   size === 'lg' && tw`w-20`,
@@ -58,7 +60,7 @@ export default function Logo({
   size = 'sm',
   variant = 'dark',
   stroke = false,
-}: LogoLinkProps & LogoSVGProps) {
+}: LogoProps) {
   return (
     <LogoLink size={size}>
       <LambSvg variant={variant} stroke={stroke} />
