@@ -7,12 +7,14 @@ import PageBlock from '../../components/PageBlock';
 import type { Cols } from '../../styles';
 import { cell, wrapper } from '../../styles';
 
-export default function Page({ work }: { work: Work[] }) {
+// export default function Page({ work }: { work: Work[] }) {
+export default function Page() {
   return (
     <main css={wrapper}>
-      {work[0].page?.map((block, i) => (
+      PLACEHOLDER
+      {/* {work[0].page?.map((block, i) => (
         <PageBlock key={i} block={block} />
-      ))}
+      ))} */}
     </main>
   );
 }
@@ -29,27 +31,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({
-  preview = false,
-  previewData,
-  params,
-}) => {
-  console.log({ params });
-  try {
-    const { work } = params as { work: string };
+// export const getStaticProps: GetStaticProps = async ({
+//   preview = false,
+//   previewData,
+//   params,
+// }) => {
+//   console.log({ params });
+//   try {
+//     const { work } = params as { work: string };
 
-    const previewCookie = { Cookie: previewData as string };
+//     const previewCookie = { Cookie: previewData as string };
 
-    const { getWorkBySlug } = sdk();
-    const { allWork } = await getWorkBySlug({ preview, slug: work }, previewCookie);
+//     const { getWorkBySlug } = sdk();
+//     const { allWork } = await getWorkBySlug({ preview, slug: work }, previewCookie);
 
-    return {
-      props: {
-        work: allWork,
-        preview,
-      },
-    };
-  } catch (err) {
-    return { notFound: true };
-  }
-};
+//     return {
+//       props: {
+//         work: allWork,
+//         preview,
+//       },
+//     };
+//   } catch (err) {
+//     return { notFound: true };
+//   }
+// };
