@@ -2,8 +2,7 @@
 // on load. Without it, the styles are only added once
 // react loads on the frontend
 
-import type { DocumentContext } from 'next/document';
-import Document from 'next/document';
+import Document, { type DocumentContext } from 'next/document';
 import { Fragment } from 'react';
 import { ServerStyleSheet } from 'styled-components';
 
@@ -23,6 +22,62 @@ export default class MyDocument extends Document {
         head: [
           <Fragment key='fonts'>
             <link rel='stylesheet' href='https://use.typekit.net/elr5mzn.css' />
+
+            <link
+              rel='shortcut icon'
+              href='/favicon-light.ico'
+              media='(prefers-color-scheme: light)'
+            />
+            <link
+              rel='shortcut icon'
+              href='/favicon-dark.ico'
+              media='(prefers-color-scheme: dark)'
+            />
+            <link
+              rel='apple-touch-icon'
+              sizes='180x180'
+              href='/apple-light.png'
+              media='(prefers-color-scheme: light)'
+            />
+            <link
+              rel='apple-touch-icon'
+              sizes='180x180'
+              href='/apple-dark.png'
+              media='(prefers-color-scheme: dark)'
+            />
+            <link
+              rel='icon'
+              type='image/png'
+              sizes='32x32'
+              href='/32-light.png'
+              media='(prefers-color-scheme: light)'
+            />
+            <link
+              rel='icon'
+              type='image/png'
+              sizes='32x32'
+              href='/32-dark.png'
+              media='(prefers-color-scheme: dark)'
+            />
+            <link
+              rel='icon'
+              type='image/png'
+              sizes='16x16'
+              href='/16-light.png'
+              media='(prefers-color-scheme: light)'
+            />
+            <link
+              rel='icon'
+              type='image/png'
+              sizes='16x16'
+              href='/16-dark.png'
+              media='(prefers-color-scheme: dark)'
+            />
+            <link rel='manifest' href='/site.webmanifest' />
+            <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#B38F89' />
+            <meta name='msapplication-TileColor' content='#B38F89' />
+            <meta name='theme-color' content='#EFE7E6' />
+            <title>Alison Lamb - Visual Designer</title>
           </Fragment>,
         ],
         styles: [

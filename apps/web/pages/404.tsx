@@ -1,5 +1,5 @@
 function ErrorPage() {
-  return <div>Not found</div>;
+  return <div>404 Not found</div>;
 }
 
 export default ErrorPage;
