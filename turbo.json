@@ -1,7 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["SANITY_ENDPOINT"],
-  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NEXT_PUBLIC_SANITY_PROJECT_ID",
+    "NEXT_PUBLIC_SANITY_DATASET",
+    "NEXT_PUBLIC_SANITY_PREVIEW_TOKEN",
+    "NEXT_PUBLIC_GOOGLE_CLIENT_ID",
+    "NEXT_PUBLIC_GOOGLE_CLIENT_SECRET",
+    "NEXT_PUBLIC_NEXTAUTH_SECRET",
+    "NEXT_PUBLIC_LOCATION",
+    "NEXT_PUBLIC_ADMIN_QUERY_SECRET"
+  ],
+  "globalDependencies": ["**/.env"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
