@@ -1,31 +1,51 @@
-import tw, { styled } from 'twin.macro';
+import Link from 'next/link';
+import { useCallback, useEffect, useRef } from 'react';
 
-import { useStickyContext } from '../../contexts/sticky';
-import { gutters } from '../../styles';
+import { useNavContext } from '../../contexts/nav';
 import { Jamburger, Logo } from '../SVG';
 
-interface NavProps {
-  sticky: boolean;
-}
-
-const Base = styled(({ ...props }) => (
-  <header {...(({ sticky, ...rest }) => rest)(props)}>{props.children}</header>
-))<NavProps>`
-  ${tw`w-screen h-16 flex items-center transition-all duration-500 before:(content-[''] absolute -top-full right-full w-full h-16 bg-brand-surface opacity-60 transition-all duration-500)`}
-  ${({ sticky }) => sticky && tw`fixed before:(top-0 right-0) z-40 backdrop-blur-md`}
-`;
-
-const Inner = styled.div({ ...gutters, ...tw`flex justify-between items-center z-50` });
+import Drawer from './Drawer';
+import { InnerNav, NavContainer } from './styled';
 
 export default function Nav() {
-  const { sticky } = useStickyContext();
+  const navigationRef = useRef<HTMLElement>(null);
+
+  const {
+    sticky,
+    active,
+    setActive,
+    jamburger: { toggle },
+  } = useNavContext();
+
+  const blurNavigation = useCallback(
+    (e: MouseEvent) => {
+      if (!navigationRef.current) return;
+
+      if (e.pageX < navigationRef.current?.offsetLeft) {
+        setActive(false);
+        toggle();
+      }
+    },
+    [setActive, toggle]
+  );
+
+  useEffect(() => {
+    if (active) window.addEventListener('click', blurNavigation);
+
+    return () => window.removeEventListener('click', blurNavigation);
+  });
 
   return (
-    <Base sticky={sticky}>
-      <Inner>
-        <Logo />
-        <Jamburger />
-      </Inner>
-    </Base>
+    <>
+      <NavContainer sticky={sticky || active} active={active}>
+        <InnerNav>
+          <Link scroll href='/'>
+            <Logo />
+          </Link>
+          <Jamburger />
+        </InnerNav>
+      </NavContainer>
+      <Drawer />
+    </>
   );
 }
