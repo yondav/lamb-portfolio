@@ -13,9 +13,10 @@
   "scripts": {
     "dev": "yarn run generate && tsc -w",
     "build": "yarn run generate && tsc",
+    "fix": "eslint src/**/* --fix",
     "generate": "graphql-codegen --config codegen.ts",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint src/**/* --fix"
+    "lint": "eslint src/**/*",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "graphql": "^16.6.0",

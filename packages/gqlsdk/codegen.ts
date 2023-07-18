@@ -21,4 +21,5 @@ const config: CodegenConfig = {
     afterAllFileWrite: ['prettier --write'],
   },
 };
+
 export default config;

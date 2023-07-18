@@ -38,6 +38,48 @@ export type BooleanFilter = {
   neq?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type Card = {
+  __typename?: 'Card';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  descriptionRaw?: Maybe<Scalars['JSON']>;
+  image?: Maybe<Image>;
+};
+
+export type CardFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type CardSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  image?: InputMaybe<ImageSorting>;
+};
+
+export type CopyPageBlock = {
+  __typename?: 'CopyPageBlock';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  copyBlockRaw?: Maybe<Scalars['JSON']>;
+};
+
+export type CopyPageBlockFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type CopyPageBlockOrGalleryPageBlockOrImagePageBlock =
+  | CopyPageBlock
+  | GalleryPageBlock
+  | ImagePageBlock;
+
+export type CopyPageBlockSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+};
+
 export type Credentials = {
   __typename?: 'Credentials';
   _key?: Maybe<Scalars['String']>;
@@ -203,6 +245,23 @@ export type FloatFilter = {
   neq?: InputMaybe<Scalars['Float']>;
 };
 
+export type GalleryPageBlock = {
+  __typename?: 'GalleryPageBlock';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  images?: Maybe<Array<Maybe<Image>>>;
+};
+
+export type GalleryPageBlockFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type GalleryPageBlockSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+};
+
 export type Geopoint = {
   __typename?: 'Geopoint';
   _key?: Maybe<Scalars['String']>;
@@ -254,6 +313,32 @@ export type ImageFilter = {
   asset?: InputMaybe<SanityImageAssetFilter>;
   crop?: InputMaybe<SanityImageCropFilter>;
   hotspot?: InputMaybe<SanityImageHotspotFilter>;
+};
+
+export type ImagePageBlock = {
+  __typename?: 'ImagePageBlock';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  alt?: Maybe<Scalars['String']>;
+  copyRaw?: Maybe<Scalars['JSON']>;
+  figure?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<Image>;
+};
+
+export type ImagePageBlockFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  alt?: InputMaybe<StringFilter>;
+  figure?: InputMaybe<BooleanFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type ImagePageBlockSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  alt?: InputMaybe<SortOrder>;
+  figure?: InputMaybe<SortOrder>;
+  image?: InputMaybe<ImageSorting>;
 };
 
 export type ImageSorting = {
@@ -329,17 +414,40 @@ export type IntFilter = {
   neq?: InputMaybe<Scalars['Int']>;
 };
 
+export type PageBlock = {
+  __typename?: 'PageBlock';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  /** All column spans will be 12 for mobile layout, making it so all blocks are stacked on smaller screens */
+  colSpan?: Maybe<Scalars['Float']>;
+  elements?: Maybe<Array<Maybe<CopyPageBlockOrGalleryPageBlockOrImagePageBlock>>>;
+};
+
+export type PageBlockFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  colSpan?: InputMaybe<FloatFilter>;
+};
+
+export type PageBlockSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  colSpan?: InputMaybe<SortOrder>;
+};
+
 export type RootQuery = {
   __typename?: 'RootQuery';
   Document?: Maybe<Document>;
   Info?: Maybe<Info>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
+  User?: Maybe<User>;
   Work?: Maybe<Work>;
   allDocument: Array<Document>;
   allInfo: Array<Info>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
+  allUser: Array<User>;
   allWork: Array<Work>;
 };
 
@@ -356,6 +464,10 @@ export type RootQuerySanityFileAssetArgs = {
 };
 
 export type RootQuerySanityImageAssetArgs = {
+  id: Scalars['ID'];
+};
+
+export type RootQueryUserArgs = {
   id: Scalars['ID'];
 };
 
@@ -389,6 +501,13 @@ export type RootQueryAllSanityImageAssetArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<Array<SanityImageAssetSorting>>;
   where?: InputMaybe<SanityImageAssetFilter>;
+};
+
+export type RootQueryAllUserArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<Array<UserSorting>>;
+  where?: InputMaybe<UserFilter>;
 };
 
 export type RootQueryAllWorkArgs = {
@@ -843,6 +962,53 @@ export type StringFilter = {
   nin?: InputMaybe<Array<Scalars['String']>>;
 };
 
+export type User = Document & {
+  __typename?: 'User';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']>;
+  _key?: Maybe<Scalars['String']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  emailVerified?: Maybe<Scalars['Boolean']>;
+  image?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type UserFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  email?: InputMaybe<StringFilter>;
+  emailVerified?: InputMaybe<BooleanFilter>;
+  image?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type UserSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  email?: InputMaybe<SortOrder>;
+  emailVerified?: InputMaybe<SortOrder>;
+  image?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
 export type Work = Document & {
   __typename?: 'Work';
   /** Date the document was created */
@@ -856,9 +1022,12 @@ export type Work = Document & {
   _type?: Maybe<Scalars['String']>;
   /** Date the document was last modified */
   _updatedAt?: Maybe<Scalars['DateTime']>;
-  descriptionRaw?: Maybe<Scalars['JSON']>;
-  image?: Maybe<Image>;
+  card?: Maybe<Card>;
+  /** Link to figma or equivalent platform */
   link?: Maybe<Scalars['String']>;
+  page?: Maybe<Array<Maybe<PageBlock>>>;
+  slug?: Maybe<Slug>;
+  /** Title will be used to generate a url and to label the card on the home page. It will also be used as the title on the featured page. */
   title?: Maybe<Scalars['String']>;
 };
 
@@ -871,8 +1040,9 @@ export type WorkFilter = {
   _rev?: InputMaybe<StringFilter>;
   _type?: InputMaybe<StringFilter>;
   _updatedAt?: InputMaybe<DatetimeFilter>;
-  image?: InputMaybe<ImageFilter>;
+  card?: InputMaybe<CardFilter>;
   link?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -883,16 +1053,41 @@ export type WorkSorting = {
   _rev?: InputMaybe<SortOrder>;
   _type?: InputMaybe<SortOrder>;
   _updatedAt?: InputMaybe<SortOrder>;
-  image?: InputMaybe<ImageSorting>;
+  card?: InputMaybe<CardSorting>;
   link?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SlugSorting>;
   title?: InputMaybe<SortOrder>;
 };
 
-export type GetInfoQueryVariables = Exact<{ [key: string]: never }>;
+export type GetAllWorkQueryVariables = Exact<{
+  preview: Scalars['Boolean'];
+}>;
+
+export type GetAllWorkQuery = {
+  __typename?: 'RootQuery';
+  allWork: Array<{
+    __typename?: 'Work';
+    title?: string | null;
+    link?: string | null;
+    slug?: { __typename?: 'Slug'; current?: string | null } | null;
+    card?: {
+      __typename?: 'Card';
+      descriptionRaw?: any | null;
+      image?: {
+        __typename?: 'Image';
+        asset?: { __typename?: 'SanityImageAsset'; url?: string | null } | null;
+      } | null;
+    } | null;
+  }>;
+};
+
+export type GetInfoQueryVariables = Exact<{
+  preview: Scalars['Boolean'];
+}>;
 
 export type GetInfoQuery = {
   __typename?: 'RootQuery';
-  Info?: {
+  allInfo: Array<{
     __typename?: 'Info';
     name?: string | null;
     title?: string | null;
@@ -922,12 +1117,94 @@ export type GetInfoQuery = {
       linkedin?: string | null;
       instagram?: string | null;
     } | null;
-  } | null;
+  }>;
 };
 
+export type GetUserQueryVariables = Exact<{
+  name: Scalars['String'];
+  email: Scalars['String'];
+  verified: Scalars['Boolean'];
+}>;
+
+export type GetUserQuery = {
+  __typename?: 'RootQuery';
+  allUser: Array<{
+    __typename?: 'User';
+    name?: string | null;
+    email?: string | null;
+    emailVerified?: boolean | null;
+    image?: string | null;
+  }>;
+};
+
+export type GetWorkBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+  preview: Scalars['Boolean'];
+}>;
+
+export type GetWorkBySlugQuery = {
+  __typename?: 'RootQuery';
+  allWork: Array<{
+    __typename?: 'Work';
+    title?: string | null;
+    link?: string | null;
+    slug?: { __typename?: 'Slug'; current?: string | null } | null;
+    card?: {
+      __typename?: 'Card';
+      image?: {
+        __typename?: 'Image';
+        asset?: { __typename?: 'SanityImageAsset'; url?: string | null } | null;
+      } | null;
+    } | null;
+    page?: Array<{
+      __typename?: 'PageBlock';
+      colSpan?: number | null;
+      elements?: Array<
+        | { __typename: 'CopyPageBlock'; copyBlockRaw?: any | null }
+        | {
+            __typename: 'GalleryPageBlock';
+            images?: Array<{
+              __typename?: 'Image';
+              asset?: { __typename?: 'SanityImageAsset'; url?: string | null } | null;
+            } | null> | null;
+          }
+        | {
+            __typename: 'ImagePageBlock';
+            alt?: string | null;
+            copyRaw?: any | null;
+            image?: {
+              __typename?: 'Image';
+              asset?: { __typename?: 'SanityImageAsset'; url?: string | null } | null;
+            } | null;
+          }
+        | null
+      > | null;
+    } | null> | null;
+  }>;
+};
+
+export const GetAllWorkDocument = gql`
+  query getAllWork($preview: Boolean!) {
+    allWork(where: { _: { is_draft: $preview } }) {
+      slug {
+        current
+      }
+      title
+      link
+      card {
+        image {
+          asset {
+            url
+          }
+        }
+        descriptionRaw
+      }
+    }
+  }
+`;
 export const GetInfoDocument = gql`
-  query getInfo {
-    Info(id: "info") {
+  query getInfo($preview: Boolean!) {
+    allInfo(where: { _: { is_draft: $preview } }) {
       name
       title
       image {
@@ -959,6 +1236,65 @@ export const GetInfoDocument = gql`
     }
   }
 `;
+export const GetUserDocument = gql`
+  query getUser($name: String!, $email: String!, $verified: Boolean!) {
+    allUser(
+      where: {
+        name: { eq: $name }
+        email: { eq: $email }
+        emailVerified: { eq: $verified }
+      }
+    ) {
+      name
+      email
+      emailVerified
+      image
+    }
+  }
+`;
+export const GetWorkBySlugDocument = gql`
+  query getWorkBySlug($slug: String!, $preview: Boolean!) {
+    allWork(where: { slug: { current: { eq: $slug } }, _: { is_draft: $preview } }) {
+      slug {
+        current
+      }
+      title
+      link
+      card {
+        image {
+          asset {
+            url
+          }
+        }
+      }
+      page {
+        colSpan
+        elements {
+          __typename
+          ... on ImagePageBlock {
+            image {
+              asset {
+                url
+              }
+            }
+            alt
+            copyRaw
+          }
+          ... on CopyPageBlock {
+            copyBlockRaw
+          }
+          ... on GalleryPageBlock {
+            images {
+              asset {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export type SdkFunctionWrapper = <T>(
   action: (requestHeaders?: Record<string, string>) => Promise<T>,
@@ -974,8 +1310,22 @@ export function getSdk(
   withWrapper: SdkFunctionWrapper = defaultWrapper
 ) {
   return {
+    getAllWork(
+      variables: GetAllWorkQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetAllWorkQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<GetAllWorkQuery>(GetAllWorkDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getAllWork',
+        'query'
+      );
+    },
     getInfo(
-      variables?: GetInfoQueryVariables,
+      variables: GetInfoQueryVariables,
       requestHeaders?: Dom.RequestInit['headers']
     ): Promise<GetInfoQuery> {
       return withWrapper(
@@ -985,6 +1335,34 @@ export function getSdk(
             ...wrappedRequestHeaders,
           }),
         'getInfo',
+        'query'
+      );
+    },
+    getUser(
+      variables: GetUserQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetUserQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<GetUserQuery>(GetUserDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getUser',
+        'query'
+      );
+    },
+    getWorkBySlug(
+      variables: GetWorkBySlugQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers']
+    ): Promise<GetWorkBySlugQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<GetWorkBySlugQuery>(GetWorkBySlugDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'getWorkBySlug',
         'query'
       );
     },
