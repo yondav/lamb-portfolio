@@ -11,6 +11,7 @@ module.exports = {
           black: 'var(--brand-black)',
           white: 'var(--brand-white)',
           surface: 'var(--brand-surface)',
+          'surface-60': 'var(--brand-surface-60)',
           peony: 'var(--brand-peony)',
           aegean: 'var(--brand-aegean)',
           lapis: 'var(--brand-lapis)',
